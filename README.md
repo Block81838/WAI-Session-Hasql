@@ -4,7 +4,7 @@ A [wai-session](https://hackage.haskell.org/package/wai-session) store that usin
 
 It supports both single hasql connection and hasql pool connection.
 
-Basic usage, see `example/Main.hs` for a complete example.
+Basic usage, see `example/Main.hs` for a complete example. You will need to replace the connection string with your own PostgreSQL connection string in the example and tests files.
 
 ```haskell
 main :: IO ()
