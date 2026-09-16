@@ -45,7 +45,7 @@ import Hasql.Session qualified as S
 import Hasql.Statement qualified as St
 import Network.Wai.Session (SessionStore)
 
--- | Wrapper for the hasql exceptions when using pool or single
+-- | Wrapper for the hasql exceptions when using pool or single connection
 data HasqlSessionException = HasqlSessionPoolException P.UsageError | HasqlSessionConnException SessionError deriving (Show)
 
 instance Exception HasqlSessionException
@@ -65,9 +65,9 @@ data SessionSetting = SessionSetting
     ssWriteEmptySession :: Bool
   }
 
--- | Haskell representaion for 'wai_pg_sessions' table schema
+-- | Haskell representation for 'wai_pg_sessions' table schema
 data Session = Session
-  { -- | Session ID in UUIDv7 format
+  { -- | Session ID in UUID(v7) format
     sSessId :: UUID,
     -- | KV store by using JSON
     sData :: Value,
