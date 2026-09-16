@@ -59,6 +59,11 @@ extra-doc-files:
 -- Extra source files to be distributed with the package, such as examples, or a tutorial module.
 -- extra-source-files:
 
+flag build-example
+     description:     Build the example executable
+     default:         False
+     manual:          True
+
 common extensions
     default-language: GHC2021
 
@@ -109,22 +114,27 @@ executable wai-session-hasql-example
 
     import:           rts-options
 
+    if !flag(build-example)
+       buildable:     False
+    else
+       buildable:     True
+
     main-is:          Main.hs
 
     build-depends:    base >=4.16.0.0 && <5,
                       wai-session-hasql,
                       wai ^>=3.2,
-                      text >= 1.2 && < 3,
+                      text,
                       cookie ^>=0.5,
                       wai-session ^>=0.3,
                       warp ^>=3.4,
-                      bytestring >= 0.10 && < 0.13,
+                      bytestring,
                       http-types ^>=0.12,
                       vault ^>=0.3,
-                      hasql ^>=2.0,
-                      hasql-pool ^>=1.5,
+                      hasql,
+                      hasql-pool,
                       pqi-native ^>=1.0,
-                      aeson >=2.0 && <2.4
+                      aeson
 
     hs-source-dirs:   example
 
@@ -160,11 +170,11 @@ test-suite wai-session-hasql-test
     build-depends:    base >=4.16.0.0 && <5,
                       wai-session-hasql,
                       hspec,
-                      hasql ^>=2.0,
-                      hasql-pool ^>=1.5,
-                      pqi-native ^>=1.0,
-                      text >= 1.2 && <3,
-                      aeson >=2.0 && <2.4
+                      hasql,
+                      hasql-pool,
+                      pqi-native,
+                      text,
+                      aeson
 
 
 source-repository head
